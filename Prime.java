@@ -7,11 +7,9 @@ import java.util.*;
 
 public class Prime implements Runnable{
     static List<Integer> primes = new ArrayList<>();
-
     static Map<Thread, Integer> map = new HashMap<>();
 
     private final static int start = 2;
-
     private final static int stop = (int) 1e8; // 10^8
 
     private final static int numThreads = 8;
@@ -67,7 +65,7 @@ public class Prime implements Runnable{
 
         for(int i = 0; i < 8; i++)
             threadList.get(i).start();
-
+            
         for(int i = 0; i < 8; i++)
             threadList.get(i).join();
 
