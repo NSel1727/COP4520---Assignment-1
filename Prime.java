@@ -9,13 +9,16 @@ public class Prime implements Runnable{
     static List<Integer> primes = new ArrayList<>();
     static Map<Thread, Integer> map = new HashMap<>();
 
-    private final static int start = 2;
+    private final static int start = 3;
     private final static int stop = (int) 1e8; // 10^8
 
-    private final static int numThreads = 8;
+    public final static int numThreads = 8;
 
-    private static long primeSum = 0;
-    private static long numPrimes = 0;
+    private final static int increment = 16;
+
+    // 2 is a known prime number, this algorithm begins from 3
+    private static long primeSum = 2;
+    private static long numPrimes = 1;
 
     @Override
     public void run()
@@ -33,7 +36,7 @@ public class Prime implements Runnable{
                 }
             }
 
-            num += numThreads;
+            num += increment;
         }   
 
     }
@@ -54,19 +57,21 @@ public class Prime implements Runnable{
         Prime p = new Prime();
 
         List<Thread> threadList = new ArrayList<>();
+  
+        int lastInc = numThreads * 2;
 
-        for(int i = 0; i < 8; i ++){
+        for(int i = 0; i < lastInc; i += 2){
             Thread t = new Thread(p);
             threadList.add(t);
-            map.put(t, i + 2); // Represents the point where incrementing by 8 starts
+            map.put(t, i + 3); // As it is useless for even numbers to be checked, start at odd numbers 
         }
 
         long start = System.currentTimeMillis();
 
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < numThreads; i++)
             threadList.get(i).start();
             
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < numThreads; i++)
             threadList.get(i).join();
 
         long end = System.currentTimeMillis(); // All threads have finished executing by this point
