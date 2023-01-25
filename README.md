@@ -21,8 +21,8 @@ time. Mathematically, a prime number cannot be divisible by any number that is n
 so if 𝑛 % 𝑖 = 0 , the number cannot be prime. The important part about my implementation
 that makes it efficient is that last possible iteration of the while loop is at 𝑖 = √𝑛. This is because
 if 𝑛 is not divisible by any ≥ 2 number by √𝑛, it will not be divisible by any number from
-(√𝑛,𝑛). This works because considering all possible pair of factors, all numbers >√𝑛 must be
-multiplied by a number <√𝑛 to be equal to 𝑛. However, if at this point 𝑛 is not divisible by any
+(√𝑛,𝑛). This works because considering all possible pair of factors, all numbers > √𝑛 must be
+multiplied by a number < √𝑛 to be equal to 𝑛. However, if at this point 𝑛 is not divisible by any
 number from [2 ,√𝑛), then it cannot be divisible by any number from (√𝑛,𝑛). Thus, it is
 optimal to stop the loop at 𝑖 = √𝑛.
 
